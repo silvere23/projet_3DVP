@@ -1,4 +1,4 @@
-name: lint workflow
+name: lint
 
 on:
   push:
@@ -34,7 +34,5 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          VALIDATE_DOCKERFILE: true
-          VALIDATE_GO: true
+          VALIDATE_ALL_CODEBASE: false  
+          DEFAULT_BRANCH: main  
