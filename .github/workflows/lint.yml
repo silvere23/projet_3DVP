@@ -19,10 +19,10 @@ jobs:
   hadolint:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v4
-        - uses: hadolint/hadolint-action@v3.1.0
-          with:
-            dockerfile: Dockerfile
+      - uses: actions/checkout@v4
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
 
   super-linter:
     if: github.event_name == 'pull_request'
@@ -33,3 +33,6 @@ jobs:
 
       - name: Run Super-Linter
         uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false  
+          DEFAULT_BRANCH: main  
