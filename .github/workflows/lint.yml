@@ -1,0 +1,35 @@
+name: lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep:1.75.0
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      - uses: actions/checkout@v4
+
+  hadolint:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v4
+        - uses: hadolint/hadolint-action@v3.1.0
+          with:
+            dockerfile: Dockerfile
+
+  super-linter:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
